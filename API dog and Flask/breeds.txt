@@ -1,3 +1,5 @@
+List of all the dog breeds included in this project:
+
 affenpinscher
 african
 airedale
