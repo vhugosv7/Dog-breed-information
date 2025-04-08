@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dog search</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <link href="https://www.svgrepo.com/show/417297/dog.svg" rel="icon" type="image/x-icon">
+</head>
+<body>
+    <div class="container mt-3">
+        <h2 class="text-center">Interesting information by dog breed</h2>
+      </div>
+      <div class="container d-flex align-items-center justify-content-center mt-4">
+        <select name="price" action="post" id="mySelect" class="form-select w-50 mx-auto" aria-label="Default select example" onChange="updateInputValue()">
+            <form method="POST">
+              <option selected >Select a dog breed.</option>
+              {% for breed in Final_result_breeds %}
+                <option id="option_user" >{{breed}}</option>
+              {% endfor %}
+              <!--To get the user selection-->
+              <p><input type="text" name="selected_user_breed" id="selectedValue" readonly hidden></p>
+              <input type="submit" class="btn btn-success mx-auto" value = "Search information"   onclick="window.location.href='{{ url_for('breeds') }}';" >
+              <button type="button" class="mx-auto btn btn-warning" style="width: 150px;" onclick="window.location.href='{{ url_for('random_dogBreed') }}';">Back</button>
+          </form>
+        </select>
+      </div>
+
+    <div class="d-flex align-items-center justify-content-center mt-4">
+      <small>Select one breed from the menu to display the information!</small>
+    </div>
+        
+    <div class="container w-25 mb-2 mt-1 " >
+        <div class="card container d-flex align-items-center justify-content-center  mt-4 " id="contentToDownload">
+            <h5 class="card-title d-flex align-items-center justify-content-center mt-2 fw-bold"  style="text-transform: capitalize;" >{{(user_selected)}}</h5>
+            <img src="{{(breed_selected)}}" alt="random breed image"  class="img-rounded mw-100 mh-100" >
+
+            <div class="card-body ">
+              <p class="card-text"  >Here is some interesting information about the {{(user_selected)}} breed.</p>
+              <div class="d-flex flex-column bd-highlight">
+                  <div class="d-flex flex-row bd-highlight ">
+
+                    <div class="p-2 bd-highlight">
+                      <label for="Life" class="fw-bold">Life expectancy</label>
+                      <p name="Life" id="Life">{{(breed_selected_info["estimated_life"])}}</p>
+                    </div>
+
+                    <div class="p-2 bd-highlight">
+                      <label for="for" id="for" class="fw-bold">Origin:</label>
+                      <p name="for" id="Origin">{{(breed_selected_info["origin"])}}</p>
+                    </div>
+
+                    <div class="p-2 bd-highlight">
+                      <label for="for" class="fw-bold">Height:</label>
+                      <p name="for" id="hei">{{(breed_selected_info["height"])}}</p>
+                    </div>
+
+                  </div>
+
+                  <div class="d-flex flex-row">
+                    <div class="p-2 bd-highlight ">
+                      <label for="weigth" class="fw-bold">Weigth:</label>
+                      <p id="weigth" name="weigth">{{(breed_selected_info["weight"])}}</p>
+                    </div>
+
+                    <div class="p-2 bd-highlight">
+                      <label for="temp"  class="fw-bold">Temperament:</label>
+                      <p id="temp" name="temp" class="lh-base" >{{(breed_selected_info["temperament"])}}</p>
+                    </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-center">
+      <button onclick="downloadContent()" class="btn btn-success">Download</button>
+    </div>
+      
+      <script>
+        // Function to get the user selected value from dropdown list
+          function updateInputValue() {
+              var selectElement = document.getElementById('mySelect');
+              var selectedValue = selectElement.value;
+              document.getElementById('selectedValue').value = selectedValue;
+          }
+      
+          // Initialize the input value when the page is loaded
+          window.onload = function() {
+              updateInputValue();
+          };
+          // To download the div container with the dog's information as PDF
+          function downloadContent() {
+          const element = document.getElementById('contentToDownload');
+          
+          // Wait until the image is loaded
+          const images = element.getElementsByTagName('img');
+          let imageLoaded = 0;
+          
+          // Ensure all images are loaded
+          Array.from(images).forEach((img) => {
+              if (img.complete) {
+                  imageLoaded++;
+              } else {
+                  img.onload = () => {
+                      imageLoaded++;
+                      if (imageLoaded === images.length) {
+                          startDownload();
+                      }
+                  };
+              }
+          });
+
+          if (images.length === 0 || imageLoaded === images.length) {
+              // If no images or all images are loaded, trigger the download
+              startDownload();
+          }
+
+          function startDownload() {
+
+            const options = {
+                  filename: 'breed_information.pdf', // Name of the downloaded file
+                  image: { type: 'jpeg', quality: 0.98 },
+                  html2canvas: { scale: 2, useCORS: true }, // Enable CORS for external images
+                  jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+              };
+
+              // Use html2pdf to convert the div content into a downloadable PDF
+              html2pdf().from(element).set(options).save();
+          }
+      }
+      </script>
+    
+</body>
+</html>
