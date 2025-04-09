@@ -47,7 +47,7 @@ Follow the steps below to set up and run this project locally.
 
 * **Requesting 5 random images**
   
-![Random images]![image](https://github.com/user-attachments/assets/1c03fcf7-b6b9-4b46-a5dc-827862ffd88e)
+  ![Random images](https://github.com/user-attachments/assets/1c03fcf7-b6b9-4b46-a5dc-827862ffd88e)
 
 
 * **View random dog image**
