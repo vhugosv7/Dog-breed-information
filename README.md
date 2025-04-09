@@ -42,7 +42,9 @@ Follow the steps below to set up and run this project locally.
 5. Open your browser and navigate to http://127.0.0.1:5000/ to interact with the application.
 
 
+
 ### Screnshoots
+
 
 
 * **Requesting 5 random images**
@@ -52,22 +54,22 @@ Follow the steps below to set up and run this project locally.
 
 * **View random dog image**
   
-  ![View image]![image](https://github.com/user-attachments/assets/41fb287b-cddc-47bd-bd9c-da7e03836b0b)
+  ![View image](https://github.com/user-attachments/assets/41fb287b-cddc-47bd-bd9c-da7e03836b0b)
 
 
 * **List of dog breeds**
   
-  ![Dog list]![image](https://github.com/user-attachments/assets/a6ae8256-465c-462f-9c36-c026d20c645c)
+  ![Dog list](https://github.com/user-attachments/assets/a6ae8256-465c-462f-9c36-c026d20c645c)
 
 
 * **Detailed information by breed**
   
-  ![Dog details]![image](https://github.com/user-attachments/assets/71c3bea1-9efd-4bb3-85bf-5fc8328bb059)
+  ![Dog details](https://github.com/user-attachments/assets/71c3bea1-9efd-4bb3-85bf-5fc8328bb059)
  
   (Available to download as PDF file)
 
 * **PDF with the selected dog breed**
   
-  ![PDF file]![image](https://github.com/user-attachments/assets/6f90918c-3d16-4132-a675-98a18809a920)
+  ![PDF file](https://github.com/user-attachments/assets/6f90918c-3d16-4132-a675-98a18809a920)
 
 
